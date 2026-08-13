@@ -7,9 +7,10 @@ public class Scene extends JPanel {
     private Integer direction = null;
 
     public Scene(int x, int y, int width, int height) {
+
         this.setBounds(x, y, width, height);
 
-        this.snake = new Snake(100, 100);
+        this.snake = new Snake(300, 300);
 
         this.addKeyListener(new MovementListener(this));
 
@@ -25,7 +26,9 @@ public class Scene extends JPanel {
 
     @Override
     public void paintComponent(Graphics graphics) {
+
         super.paintComponent(graphics);
+
         this.snake.draw(graphics, this.direction);
     }
 
@@ -38,15 +41,19 @@ public class Scene extends JPanel {
                 if (this.direction != null) {
 
                     if (this.direction == 0) {
+
                         this.snake.moveRight();
 
                     } else if (this.direction == 1) {
+
                         this.snake.moveLeft();
 
                     } else if (this.direction == 2) {
+
                         this.snake.moveDown();
 
                     } else if (this.direction == 3) {
+
                         this.snake.moveUp();
                     }
                 }
@@ -54,8 +61,11 @@ public class Scene extends JPanel {
                 this.repaint();
 
                 try {
-                    Thread.sleep(100);
+
+                    Thread.sleep(300);
+
                 } catch (InterruptedException e) {
+
                     Thread.currentThread().interrupt();
                     break;
                 }
