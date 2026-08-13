@@ -11,10 +11,12 @@ public class Scene extends JPanel {
 
         this.snake = new Snake(100, 100);
 
-        this.addKeyListener(new MovementListener(this.snake, this));
+        this.addKeyListener(new MovementListener(this));
 
         this.setFocusable(true);
         this.requestFocus();
+
+        this.mainGameLoop();
     }
 
     public void setDirection(Integer direction) {
@@ -25,5 +27,41 @@ public class Scene extends JPanel {
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
         this.snake.draw(graphics, this.direction);
+    }
+
+    private void mainGameLoop() {
+
+        Thread gameThread = new Thread(() -> {
+
+            while (true) {
+
+                if (this.direction != null) {
+
+                    if (this.direction == 0) {
+                        this.snake.moveRight();
+
+                    } else if (this.direction == 1) {
+                        this.snake.moveLeft();
+
+                    } else if (this.direction == 2) {
+                        this.snake.moveDown();
+
+                    } else if (this.direction == 3) {
+                        this.snake.moveUp();
+                    }
+                }
+
+                this.repaint();
+
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    break;
+                }
+            }
+        });
+
+        gameThread.start();
     }
 }

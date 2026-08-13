@@ -3,11 +3,9 @@ import java.awt.event.KeyListener;
 
 public class MovementListener implements KeyListener {
 
-    private final Snake snake;
     private final Scene scene;
 
-    public MovementListener(Snake snake, Scene scene) {
-        this.snake = snake;
+    public MovementListener(Scene scene) {
         this.scene = scene;
     }
 
@@ -20,22 +18,16 @@ public class MovementListener implements KeyListener {
 
         if (e.getKeyCode() == KeyEvent.VK_D) {
             this.scene.setDirection(0);
-            this.snake.moveRight();
 
         } else if (e.getKeyCode() == KeyEvent.VK_A) {
             this.scene.setDirection(1);
-            this.snake.moveLeft();
 
         } else if (e.getKeyCode() == KeyEvent.VK_S) {
             this.scene.setDirection(2);
-            this.snake.moveDown();
 
         } else if (e.getKeyCode() == KeyEvent.VK_W) {
             this.scene.setDirection(3);
-            this.snake.moveUp();
         }
-
-        this.scene.repaint();
     }
 
     @Override
