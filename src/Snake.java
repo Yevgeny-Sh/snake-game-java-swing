@@ -20,7 +20,7 @@ public class Snake {
         this.y = y;
 
         this.bodyParts = new ArrayList<>();
-        this.desiredBodyLength = 0;
+        this.desiredBodyLength = 5;
 
         URL imageUrl = getClass().getResource("/images/snake-head.png");
 
@@ -64,8 +64,7 @@ public class Snake {
     }
 
     public void draw(Graphics graphics, Integer direction) {
-        graphics.setColor(Color.GREEN);
-
+        graphics.setColor(Color.DARK_GRAY);
         for (Point bodyPart : bodyParts) {
             graphics.fillRect(
                     bodyPart.x,
