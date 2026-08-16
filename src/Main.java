@@ -29,6 +29,7 @@ public class Main {
                         WINDOW_HEIGHT
                 )
         );
+        window.add( new MenuPanel( 0, 0, SIDE_PANEL_WIDTH, WINDOW_HEIGHT ) );
 
         window.setLocationRelativeTo(null);
         window.setVisible(true);
