@@ -11,8 +11,8 @@ public class Scene extends JPanel {
 
         this.setBounds(x, y, width, height);
 
-        this.snake = new Snake(320, 320);
-        this.food = new Food(320, 240);
+        this.snake = new Snake(330, 330);
+        this.food = new Food(330, 250);
 
         this.addKeyListener(new MovementListener(this));
 

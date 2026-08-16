@@ -3,8 +3,9 @@ import java.awt.*;
 
 public class Main {
 
-    public static final int WINDOW_WIDTH = 1200;
-    public static final int WINDOW_HEIGHT = 800;
+    public static final int SIDE_PANEL_WIDTH = 240;
+    public static final int WINDOW_WIDTH = 1220;
+    public static final int WINDOW_HEIGHT = 820;
 
     public static void main(String[] args) {
 
@@ -22,9 +23,9 @@ public class Main {
 
         window.add(
                 new Scene(
-                        WINDOW_WIDTH / 5,
+                        SIDE_PANEL_WIDTH,
                         0,
-                        WINDOW_WIDTH - WINDOW_WIDTH / 5,
+                        WINDOW_WIDTH - SIDE_PANEL_WIDTH,
                         WINDOW_HEIGHT
                 )
         );
