@@ -6,7 +6,7 @@ public class Scene extends JPanel {
     private final Snake snake;
     private Integer direction = null;
     private Food food;
-
+    private static final int BORDER_SIZE = 10;
     public Scene(int x, int y, int width, int height) {
 
         this.setBounds(x, y, width, height);
@@ -27,13 +27,21 @@ public class Scene extends JPanel {
     }
 
     @Override
+
     public void paintComponent(Graphics graphics) {
 
         super.paintComponent(graphics);
 
-        this.snake.draw(graphics, this.direction);
-        food.draw(graphics);
+        graphics.setColor(Color.black);
 
+        graphics.fillRect(0, 0, getWidth(), BORDER_SIZE);
+        graphics.fillRect(0, getHeight() - BORDER_SIZE, getWidth(), BORDER_SIZE);
+
+        graphics.fillRect(0, 0, BORDER_SIZE, getHeight());
+        graphics.fillRect(getWidth() - BORDER_SIZE, 0, BORDER_SIZE, getHeight());
+
+        this.snake.draw(graphics, this.direction);
+        this.food.draw(graphics);
     }
 
     private void mainGameLoop() {
