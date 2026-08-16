@@ -42,6 +42,7 @@ public class Main {
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
+        menuPanel.getPauseButton().setFocusable(false);
         menuPanel.getPauseButton().addActionListener(e -> scene.togglePause());
         scene.requestFocusInWindow();
     }

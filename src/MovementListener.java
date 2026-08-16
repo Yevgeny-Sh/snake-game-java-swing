@@ -16,6 +16,11 @@ public class MovementListener implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
 
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            scene.togglePause();
+            return;
+        }
+
         if (e.getKeyCode() == KeyEvent.VK_D) {
             this.scene.setDirection(0);
 
