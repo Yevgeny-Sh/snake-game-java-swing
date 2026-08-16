@@ -80,6 +80,19 @@ public class Snake {
                 return true;
             }
         }
+        return false;
+    }
+    public boolean occupiesPosition(int x, int y) {
+
+        if (this.x == x && this.y == y) {
+            return true;
+        }
+
+        for (Point bodyPart : bodyParts) {
+            if (bodyPart.x == x && bodyPart.y == y) {
+                return true;
+            }
+        }
 
         return false;
     }

@@ -73,11 +73,17 @@ public class Scene extends JPanel {
         int columns = (getWidth() - 2 * BORDER_SIZE) / Snake.TILE_SIZE;
         int rows = (getHeight() - 2 * BORDER_SIZE) / Snake.TILE_SIZE;
 
-        int randomColumn = random.nextInt(columns);
-        int randomRow = random.nextInt(rows);
+        int x;
+        int y;
 
-        int x = BORDER_SIZE + randomColumn * Snake.TILE_SIZE;
-        int y = BORDER_SIZE + randomRow * Snake.TILE_SIZE;
+        do {
+            int randomColumn = random.nextInt(columns);
+            int randomRow = random.nextInt(rows);
+
+            x = BORDER_SIZE + randomColumn * Snake.TILE_SIZE;
+            y = BORDER_SIZE + randomRow * Snake.TILE_SIZE;
+
+        } while (snake.occupiesPosition(x, y));
 
         food.setPosition(x, y);
     }
