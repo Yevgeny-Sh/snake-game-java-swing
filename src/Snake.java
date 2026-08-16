@@ -1,16 +1,17 @@
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class Snake {
 
-    private static final int HEAD_SIZE = 80;
+    private static final int TILE_SIZE = 80;
 
     private int x;
     private int y;
 
-    private final int[] bodyX;
-    private final int[] bodyY;
+    private final ArrayList<Point> bodyParts;
+    private int desiredBodyLength;
 
     private final Image snakeHeadImage;
 
@@ -18,19 +19,8 @@ public class Snake {
         this.x = x;
         this.y = y;
 
-        // כרגע לנחש יש 3 חלקי גוף
-        this.bodyX = new int[3];
-        this.bodyY = new int[3];
-
-        // הגוף מתחיל משמאל לראש
-        this.bodyX[0] = x - 80;
-        this.bodyY[0] = y;
-
-        this.bodyX[1] = x - 160;
-        this.bodyY[1] = y;
-
-        this.bodyX[2] = x - 240;
-        this.bodyY[2] = y;
+        this.bodyParts = new ArrayList<>();
+        this.desiredBodyLength = 0;
 
         URL imageUrl = getClass().getResource("/images/snake-head.png");
 
@@ -42,109 +32,87 @@ public class Snake {
     }
 
     private void moveBody() {
+        bodyParts.add(0, new Point(x, y));
 
-        // מתחילים מהחלק האחרון
-        for (int i = bodyX.length - 1; i > 0; i--) {
-
-            bodyX[i] = bodyX[i - 1];
-            bodyY[i] = bodyY[i - 1];
+        if (bodyParts.size() > desiredBodyLength) {
+            bodyParts.remove(bodyParts.size() - 1);
         }
+    }
 
-        // החלק הראשון מקבל את המקום הנוכחי של הראש
-        bodyX[0] = x;
-        bodyY[0] = y;
+    public void grow() {
+        desiredBodyLength++;
     }
 
     public void moveRight() {
-
         moveBody();
-        this.x += 80;
+        this.x += TILE_SIZE;
     }
 
     public void moveLeft() {
-
         moveBody();
-        this.x -= 80;
+        this.x -= TILE_SIZE;
     }
 
     public void moveUp() {
-
         moveBody();
-        this.y -= 80;
+        this.y -= TILE_SIZE;
     }
 
     public void moveDown() {
-
         moveBody();
-        this.y += 80;
+        this.y += TILE_SIZE;
     }
 
     public void draw(Graphics graphics, Integer direction) {
-
-        // מציירים קודם את הגוף
         graphics.setColor(Color.GREEN);
 
-        for (int i = 0; i < bodyX.length; i++) {
-
+        for (Point bodyPart : bodyParts) {
             graphics.fillRect(
-                    bodyX[i],
-                    bodyY[i],
-                    80,
-                    80
+                    bodyPart.x,
+                    bodyPart.y,
+                    TILE_SIZE,
+                    TILE_SIZE
             );
         }
 
-
-        // ואז מציירים את הראש
         Graphics2D graphics2D = (Graphics2D) graphics.create();
 
-        int centerX = this.x + HEAD_SIZE / 2;
-        int centerY = this.y + HEAD_SIZE / 2;
+        int centerX = this.x + TILE_SIZE / 2;
+        int centerY = this.y + TILE_SIZE / 2;
 
         double angle = 0;
 
         if (direction != null) {
-
             if (direction == 0) {
                 angle = Math.toRadians(270);
-
             } else if (direction == 1) {
                 angle = Math.toRadians(90);
-
             } else if (direction == 2) {
                 angle = Math.toRadians(0);
-
             } else if (direction == 3) {
                 angle = Math.toRadians(180);
             }
         }
 
-        graphics2D.rotate(
-                angle,
-                centerX,
-                centerY
-        );
+        graphics2D.rotate(angle, centerX, centerY);
 
         if (this.snakeHeadImage != null) {
-
             graphics2D.drawImage(
                     this.snakeHeadImage,
                     this.x,
                     this.y,
-                    HEAD_SIZE,
-                    HEAD_SIZE,
+                    TILE_SIZE,
+                    TILE_SIZE,
                     null
             );
-
         } else {
-
             graphics2D.setColor(Color.BLACK);
 
             graphics2D.fillRect(
                     this.x,
                     this.y,
-                    HEAD_SIZE,
-                    HEAD_SIZE
+                    TILE_SIZE,
+                    TILE_SIZE
             );
         }
 
