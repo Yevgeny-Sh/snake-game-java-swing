@@ -74,7 +74,7 @@ public class Scene extends JPanel {
                     }
 
                     if (hasWallCollision()) {
-                        System.out.println("Wall collision");
+                        break;
                     }
 
                     if (snake.getX() == food.getX() &&
