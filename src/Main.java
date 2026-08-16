@@ -21,15 +21,23 @@ public class Main {
 
         window.pack();
 
-        window.add(
-                new Scene(
-                        SIDE_PANEL_WIDTH,
-                        0,
-                        WINDOW_WIDTH - SIDE_PANEL_WIDTH,
-                        WINDOW_HEIGHT
-                )
+        MenuPanel menuPanel = new MenuPanel(
+                0,
+                0,
+                SIDE_PANEL_WIDTH,
+                WINDOW_HEIGHT
         );
-        window.add( new MenuPanel( 0, 0, SIDE_PANEL_WIDTH, WINDOW_HEIGHT ) );
+
+        Scene scene = new Scene(
+                SIDE_PANEL_WIDTH,
+                0,
+                WINDOW_WIDTH - SIDE_PANEL_WIDTH,
+                WINDOW_HEIGHT,
+                menuPanel
+        );
+
+        window.add(menuPanel);
+        window.add(scene);
 
         window.setLocationRelativeTo(null);
         window.setVisible(true);

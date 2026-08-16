@@ -10,9 +10,13 @@ public class Scene extends JPanel {
     private Integer direction = null;
     private Food food;
     private static final int BORDER_SIZE = 10;
-    public Scene(int x, int y, int width, int height) {
+    private int score = 0;
+    private final MenuPanel menuPanel;
+    public Scene(int x, int y, int width, int height, MenuPanel menuPanel) {
 
         this.setBounds(x, y, width, height);
+
+        this.menuPanel = menuPanel;
 
         this.snake = new Snake(330, 330);
         this.food = new Food(330, 250);
@@ -132,12 +136,16 @@ public class Scene extends JPanel {
                         break;
                     }
 
+                    //ate an apple
                     if (snake.getX() == food.getX() &&
                             snake.getY() == food.getY()) {
 
                         snake.grow();
-                        moveFoodToRandomPosition();
 
+                        score++;
+                        menuPanel.updateScore(score);
+
+                        moveFoodToRandomPosition();
                     }
                 }
 
