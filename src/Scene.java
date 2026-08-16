@@ -5,12 +5,14 @@ public class Scene extends JPanel {
 
     private final Snake snake;
     private Integer direction = null;
+    private Food food;
 
     public Scene(int x, int y, int width, int height) {
 
         this.setBounds(x, y, width, height);
 
         this.snake = new Snake(300, 300);
+        this.food = new Food(320, 240);
 
         this.addKeyListener(new MovementListener(this));
 
@@ -30,6 +32,8 @@ public class Scene extends JPanel {
         super.paintComponent(graphics);
 
         this.snake.draw(graphics, this.direction);
+        food.draw(graphics);
+
     }
 
     private void mainGameLoop() {
