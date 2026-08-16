@@ -49,6 +49,9 @@ public class Snake {
     public void grow() {
         desiredBodyLength++;
     }
+    public boolean hasBody() {
+        return desiredBodyLength > 0;
+    }
 
     public void moveRight() {
         moveBody();
@@ -69,7 +72,17 @@ public class Snake {
         moveBody();
         this.y += TILE_SIZE;
     }
+    public boolean hasSelfCollision() {
 
+        for (Point bodyPart : bodyParts) {
+
+            if (x == bodyPart.x && y == bodyPart.y) {
+                return true;
+            }
+        }
+
+        return false;
+    }
     public void draw(Graphics graphics, Integer direction) {
         graphics.setColor(Color.DARK_GRAY);
         for (Point bodyPart : bodyParts) {

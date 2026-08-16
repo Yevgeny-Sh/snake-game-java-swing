@@ -22,8 +22,21 @@ public class Scene extends JPanel {
         this.mainGameLoop();
     }
 
-    public void setDirection(Integer direction) {
-        this.direction = direction;
+    public void setDirection(Integer newDirection) {
+
+        if (!snake.hasBody()) {
+            this.direction = newDirection;
+            return;
+        }
+        //prevent 180 turn if has body
+        if ((direction == 0 && newDirection == 1) ||
+                (direction == 1 && newDirection == 0) ||
+                (direction == 2 && newDirection == 3) ||
+                (direction == 3 && newDirection == 2)) {
+            return;
+        }
+
+        this.direction = newDirection;
     }
 
     @Override
