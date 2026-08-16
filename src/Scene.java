@@ -89,6 +89,10 @@ public class Scene extends JPanel {
                     if (hasWallCollision()) {
                         break;
                     }
+                    if (snake.hasSelfCollision()) {
+                        this.repaint();
+                        break;
+                    }
 
                     if (snake.getX() == food.getX() &&
                             snake.getY() == food.getY()) {
