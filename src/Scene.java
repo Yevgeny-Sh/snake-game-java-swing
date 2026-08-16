@@ -11,7 +11,7 @@ public class Scene extends JPanel {
 
         this.setBounds(x, y, width, height);
 
-        this.snake = new Snake(300, 300);
+        this.snake = new Snake(320, 320);
         this.food = new Food(320, 240);
 
         this.addKeyListener(new MovementListener(this));
@@ -45,31 +45,31 @@ public class Scene extends JPanel {
                 if (this.direction != null) {
 
                     if (this.direction == 0) {
-
                         this.snake.moveRight();
 
                     } else if (this.direction == 1) {
-
                         this.snake.moveLeft();
 
                     } else if (this.direction == 2) {
-
                         this.snake.moveDown();
 
                     } else if (this.direction == 3) {
-
                         this.snake.moveUp();
+                    }
+
+                    if (snake.getX() == food.getX() &&
+                            snake.getY() == food.getY()) {
+
+                        System.out.println("Snake ate food");
                     }
                 }
 
                 this.repaint();
 
                 try {
-
                     Thread.sleep(300);
 
                 } catch (InterruptedException e) {
-
                     Thread.currentThread().interrupt();
                     break;
                 }

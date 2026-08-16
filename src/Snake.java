@@ -31,6 +31,14 @@ public class Snake {
         }
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
     private void moveBody() {
         bodyParts.add(0, new Point(x, y));
 
