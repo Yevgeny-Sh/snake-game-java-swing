@@ -1,9 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.Random;
 
 public class Scene extends JPanel {
 
     private final Snake snake;
+    private final Random random = new Random();
+
     private Integer direction = null;
     private Food food;
     private static final int BORDER_SIZE = 10;
@@ -65,6 +68,20 @@ public class Scene extends JPanel {
                 snake.getY() + Snake.TILE_SIZE > getHeight() - BORDER_SIZE;
     }
 
+    private void moveFoodToRandomPosition() {
+
+        int columns = (getWidth() - 2 * BORDER_SIZE) / Snake.TILE_SIZE;
+        int rows = (getHeight() - 2 * BORDER_SIZE) / Snake.TILE_SIZE;
+
+        int randomColumn = random.nextInt(columns);
+        int randomRow = random.nextInt(rows);
+
+        int x = BORDER_SIZE + randomColumn * Snake.TILE_SIZE;
+        int y = BORDER_SIZE + randomRow * Snake.TILE_SIZE;
+
+        food.setPosition(x, y);
+    }
+
     private void mainGameLoop() {
 
         Thread gameThread = new Thread(() -> {
@@ -98,6 +115,8 @@ public class Scene extends JPanel {
                             snake.getY() == food.getY()) {
 
                         snake.grow();
+                        moveFoodToRandomPosition();
+
                     }
                 }
 
