@@ -5,8 +5,7 @@ import java.util.ArrayList;
 
 public class Snake {
 
-    private static final int TILE_SIZE = 80;
-
+    public static final int TILE_SIZE = 80;
     private int x;
     private int y;
 

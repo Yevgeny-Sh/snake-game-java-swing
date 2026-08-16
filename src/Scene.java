@@ -44,6 +44,14 @@ public class Scene extends JPanel {
         this.food.draw(graphics);
     }
 
+    private boolean hasWallCollision() {
+
+        return snake.getX() < BORDER_SIZE ||
+                snake.getY() < BORDER_SIZE ||
+                snake.getX() + Snake.TILE_SIZE > getWidth() - BORDER_SIZE ||
+                snake.getY() + Snake.TILE_SIZE > getHeight() - BORDER_SIZE;
+    }
+
     private void mainGameLoop() {
 
         Thread gameThread = new Thread(() -> {
@@ -65,10 +73,15 @@ public class Scene extends JPanel {
                         this.snake.moveUp();
                     }
 
+                    if (hasWallCollision()) {
+                        System.out.println("Wall collision");
+                    }
+
                     if (snake.getX() == food.getX() &&
                             snake.getY() == food.getY()) {
 
-                        snake.grow();                    }
+                        snake.grow();
+                    }
                 }
 
                 this.repaint();
