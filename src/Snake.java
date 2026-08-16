@@ -20,7 +20,7 @@ public class Snake {
         this.y = y;
 
         this.bodyParts = new ArrayList<>();
-        this.desiredBodyLength = 5;
+        this.desiredBodyLength = 0;
 
         URL imageUrl = getClass().getResource("/images/snake-head.png");
 

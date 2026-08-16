@@ -60,8 +60,7 @@ public class Scene extends JPanel {
                     if (snake.getX() == food.getX() &&
                             snake.getY() == food.getY()) {
 
-                        System.out.println("Snake ate food");
-                    }
+                        snake.grow();                    }
                 }
 
                 this.repaint();
