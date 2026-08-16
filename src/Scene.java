@@ -60,12 +60,25 @@ public class Scene extends JPanel {
         this.food.draw(graphics);
     }
 
-    private boolean hasWallCollision() {
+    private boolean willHitWall() {
 
-        return snake.getX() < BORDER_SIZE ||
-                snake.getY() < BORDER_SIZE ||
-                snake.getX() + Snake.TILE_SIZE > getWidth() - BORDER_SIZE ||
-                snake.getY() + Snake.TILE_SIZE > getHeight() - BORDER_SIZE;
+        int nextX = snake.getX();
+        int nextY = snake.getY();
+
+        if (direction == 0) {
+            nextX += Snake.TILE_SIZE;
+        } else if (direction == 1) {
+            nextX -= Snake.TILE_SIZE;
+        } else if (direction == 2) {
+            nextY += Snake.TILE_SIZE;
+        } else if (direction == 3) {
+            nextY -= Snake.TILE_SIZE;
+        }
+
+        return nextX < BORDER_SIZE ||
+                nextY < BORDER_SIZE ||
+                nextX + Snake.TILE_SIZE > getWidth() - BORDER_SIZE ||
+                nextY + Snake.TILE_SIZE > getHeight() - BORDER_SIZE;
     }
 
     private void moveFoodToRandomPosition() {
@@ -96,6 +109,11 @@ public class Scene extends JPanel {
 
                 if (this.direction != null) {
 
+                    if (willHitWall()) {
+                        this.repaint();
+                        break;
+                    }
+
                     if (this.direction == 0) {
                         this.snake.moveRight();
 
@@ -109,9 +127,6 @@ public class Scene extends JPanel {
                         this.snake.moveUp();
                     }
 
-                    if (hasWallCollision()) {
-                        break;
-                    }
                     if (snake.hasSelfCollision()) {
                         this.repaint();
                         break;
