@@ -21,6 +21,15 @@ public class Main {
 
         window.pack();
 
+        JLayeredPane layeredPane = new JLayeredPane();
+
+        layeredPane.setBounds(
+                0,
+                0,
+                WINDOW_WIDTH,
+                WINDOW_HEIGHT
+        );
+
         MenuPanel menuPanel = new MenuPanel(
                 0,
                 0,
@@ -36,14 +45,31 @@ public class Main {
                 menuPanel
         );
 
-        window.add(menuPanel);
-        window.add(scene);
+        GameOverlayPanel overlayPanel = new GameOverlayPanel(
+                0,
+                0,
+                WINDOW_WIDTH,
+                WINDOW_HEIGHT
+        );
+
+        layeredPane.add(menuPanel, JLayeredPane.DEFAULT_LAYER);
+        layeredPane.add(scene, JLayeredPane.DEFAULT_LAYER);
+        layeredPane.add(overlayPanel, JLayeredPane.PALETTE_LAYER);
+
+        window.add(layeredPane);
+
+        menuPanel.getPauseButton().setFocusable(false);
+        menuPanel.getPauseButton().addActionListener(
+                e -> scene.togglePause()
+        );
+
+        overlayPanel.getStartButton().addActionListener(e -> {
+            overlayPanel.setVisible(false);
+            scene.startGame();
+            scene.requestFocusInWindow();
+        });
 
         window.setLocationRelativeTo(null);
         window.setVisible(true);
-
-        menuPanel.getPauseButton().setFocusable(false);
-        menuPanel.getPauseButton().addActionListener(e -> scene.togglePause());
-        scene.requestFocusInWindow();
     }
 }

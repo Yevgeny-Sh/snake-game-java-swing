@@ -28,7 +28,10 @@ public class Scene extends JPanel {
 
         this.setFocusable(true);
 
-        this.mainGameLoop();
+    }
+
+    public void startGame() {
+        mainGameLoop();
     }
 
     public void setDirection(Integer newDirection) {
