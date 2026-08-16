@@ -41,5 +41,8 @@ public class Main {
 
         window.setLocationRelativeTo(null);
         window.setVisible(true);
+
+        menuPanel.getPauseButton().addActionListener(e -> scene.togglePause());
+        scene.requestFocusInWindow();
     }
 }

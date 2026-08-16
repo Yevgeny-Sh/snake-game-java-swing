@@ -12,6 +12,9 @@ public class Scene extends JPanel {
     private static final int BORDER_SIZE = 10;
     private int score = 0;
     private final MenuPanel menuPanel;
+
+    //volatile - to make sure Swing Thread sees Game Thread
+    private volatile boolean paused = false;
     public Scene(int x, int y, int width, int height, MenuPanel menuPanel) {
 
         this.setBounds(x, y, width, height);
@@ -24,18 +27,21 @@ public class Scene extends JPanel {
         this.addKeyListener(new MovementListener(this));
 
         this.setFocusable(true);
-        this.requestFocus();
 
         this.mainGameLoop();
     }
 
     public void setDirection(Integer newDirection) {
 
+        if (paused) {
+            return;
+        }
+
         if (!snake.hasBody()) {
             this.direction = newDirection;
             return;
         }
-        //prevent 180 turn if has body
+
         if ((direction == 0 && newDirection == 1) ||
                 (direction == 1 && newDirection == 0) ||
                 (direction == 2 && newDirection == 3) ||
@@ -105,13 +111,19 @@ public class Scene extends JPanel {
         food.setPosition(x, y);
     }
 
+    public void togglePause() {
+        paused = !paused;
+        menuPanel.updateTextPauseButton(paused);
+        requestFocusInWindow();
+    }
+
     private void mainGameLoop() {
 
         Thread gameThread = new Thread(() -> {
 
             while (true) {
 
-                if (this.direction != null) {
+                if (this.direction != null && !paused) {
 
                     if (willHitWall()) {
                         this.repaint();

@@ -4,6 +4,7 @@ import java.awt.*;
 public class MenuPanel extends JPanel {
 
     private final JLabel scoreLabel;
+    private final JButton pauseButton;
 
     public MenuPanel(int x, int y, int width, int height) {
 
@@ -19,9 +20,27 @@ public class MenuPanel extends JPanel {
         this.scoreLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         this.add(scoreLabel);
+
+        this.pauseButton = new JButton("Pause");
+        this.pauseButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        this.add(Box.createVerticalStrut(30));
+        this.add(pauseButton);
     }
 
     public void updateScore(int score) {
         scoreLabel.setText("Score: " + score);
+    }
+
+    public JButton getPauseButton() {
+        return pauseButton;
+    }
+
+    public void updateTextPauseButton(boolean paused) {
+        if (paused) {
+            pauseButton.setText("Resume");
+        } else {
+            pauseButton.setText("Pause");
+        }
     }
 }
