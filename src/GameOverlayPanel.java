@@ -3,36 +3,38 @@ import java.awt.*;
 
 public class GameOverlayPanel extends JPanel {
 
+    private final JLabel titleLabel;
+    private final JLabel movementLabel;
+    private final JLabel pauseLabel;
+    private final JLabel goalLabel;
     private final JButton startButton;
 
     public GameOverlayPanel(int x, int y, int width, int height) {
 
         this.setBounds(x, y, width, height);
         this.setBackground(new Color(245, 245, 245));
-
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(Box.createVerticalStrut(150));
 
-        JLabel titleLabel = new JLabel("SNAKE");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 40));
-        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.titleLabel = new JLabel("SNAKE");
+        this.titleLabel.setFont(new Font("Arial", Font.BOLD, 40));
+        this.titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         this.add(titleLabel);
-
         this.add(Box.createVerticalStrut(50));
 
-        JLabel movementLabel = new JLabel("Move: W A S D");
-        movementLabel.setFont(new Font("Arial", Font.PLAIN, 22));
-        movementLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.movementLabel = new JLabel("Move: W A S D");
+        this.movementLabel.setFont(new Font("Arial", Font.PLAIN, 22));
+        this.movementLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel pauseLabel = new JLabel("Pause / Resume: Space");
-        pauseLabel.setFont(new Font("Arial", Font.PLAIN, 22));
-        pauseLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.pauseLabel = new JLabel("Pause / Resume: Space");
+        this.pauseLabel.setFont(new Font("Arial", Font.PLAIN, 22));
+        this.pauseLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel goalLabel = new JLabel("Eat apples and avoid walls and yourself");
-        goalLabel.setFont(new Font("Arial", Font.PLAIN, 22));
-        goalLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.goalLabel = new JLabel("Eat apples and avoid walls and yourself");
+        this.goalLabel.setFont(new Font("Arial", Font.PLAIN, 22));
+        this.goalLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         this.add(movementLabel);
         this.add(Box.createVerticalStrut(15));
@@ -51,5 +53,20 @@ public class GameOverlayPanel extends JPanel {
 
     public JButton getStartButton() {
         return startButton;
+    }
+
+    public void showGameOver(int score) {
+
+        titleLabel.setText("GAME OVER");
+
+        movementLabel.setVisible(false);
+        pauseLabel.setVisible(false);
+
+        goalLabel.setText("Score: " + score);
+
+        startButton.setText("New Game");
+        startButton.setEnabled(false);
+
+        setVisible(true);
     }
 }

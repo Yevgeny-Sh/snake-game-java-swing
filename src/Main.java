@@ -37,20 +37,23 @@ public class Main {
                 WINDOW_HEIGHT
         );
 
-        Scene scene = new Scene(
-                SIDE_PANEL_WIDTH,
-                0,
-                WINDOW_WIDTH - SIDE_PANEL_WIDTH,
-                WINDOW_HEIGHT,
-                menuPanel
-        );
-
         GameOverlayPanel overlayPanel = new GameOverlayPanel(
                 0,
                 0,
                 WINDOW_WIDTH,
                 WINDOW_HEIGHT
         );
+
+        Scene scene = new Scene(
+                SIDE_PANEL_WIDTH,
+                0,
+                WINDOW_WIDTH - SIDE_PANEL_WIDTH,
+                WINDOW_HEIGHT,
+                menuPanel,
+                overlayPanel
+        );
+
+
 
         layeredPane.add(menuPanel, JLayeredPane.DEFAULT_LAYER);
         layeredPane.add(scene, JLayeredPane.DEFAULT_LAYER);

@@ -12,14 +12,17 @@ public class Scene extends JPanel {
     private static final int BORDER_SIZE = 10;
     private int score = 0;
     private final MenuPanel menuPanel;
+    private final GameOverlayPanel overlayPanel;
 
     //volatile - to make sure Swing Thread sees Game Thread
     private volatile boolean paused = false;
-    public Scene(int x, int y, int width, int height, MenuPanel menuPanel) {
+    public Scene(int x, int y, int width, int height, MenuPanel menuPanel,GameOverlayPanel overlayPanel) {
 
         this.setBounds(x, y, width, height);
 
         this.menuPanel = menuPanel;
+        this.overlayPanel = overlayPanel;
+
 
         this.snake = new Snake(330, 330);
         this.food = new Food(330, 250);
@@ -120,6 +123,12 @@ public class Scene extends JPanel {
         requestFocusInWindow();
     }
 
+    private void gameOver() {
+        SwingUtilities.invokeLater(() ->
+                overlayPanel.showGameOver(score)
+        );
+    }
+
     private void mainGameLoop() {
 
         Thread gameThread = new Thread(() -> {
@@ -129,7 +138,7 @@ public class Scene extends JPanel {
                 if (this.direction != null && !paused) {
 
                     if (willHitWall()) {
-                        this.repaint();
+                        gameOver();
                         break;
                     }
 
@@ -147,7 +156,7 @@ public class Scene extends JPanel {
                     }
 
                     if (snake.hasSelfCollision()) {
-                        this.repaint();
+                        gameOver();
                         break;
                     }
 
