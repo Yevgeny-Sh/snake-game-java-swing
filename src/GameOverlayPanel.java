@@ -65,8 +65,7 @@ public class GameOverlayPanel extends JPanel {
         goalLabel.setText("Score: " + score);
 
         startButton.setText("New Game");
-        startButton.setEnabled(false);
-
+        startButton.setEnabled(true);
         setVisible(true);
     }
 }

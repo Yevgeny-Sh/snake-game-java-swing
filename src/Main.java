@@ -68,7 +68,7 @@ public class Main {
 
         overlayPanel.getStartButton().addActionListener(e -> {
             overlayPanel.setVisible(false);
-            scene.startGame();
+            scene.startNewGame();
             scene.requestFocusInWindow();
         });
 

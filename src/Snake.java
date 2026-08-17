@@ -96,6 +96,14 @@ public class Snake {
 
         return false;
     }
+
+    public void reset(int x, int y) {
+        this.x = x;
+        this.y = y;
+
+        bodyParts.clear();
+        desiredBodyLength = 0;
+    }
     public void draw(Graphics graphics, Integer direction) {
         graphics.setColor(Color.DARK_GRAY);
         for (Point bodyPart : bodyParts) {

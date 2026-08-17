@@ -33,9 +33,6 @@ public class Scene extends JPanel {
 
     }
 
-    public void startGame() {
-        mainGameLoop();
-    }
 
     public void setDirection(Integer newDirection) {
 
@@ -129,6 +126,21 @@ public class Scene extends JPanel {
         );
     }
 
+    public void startNewGame() {
+
+        snake.reset(330, 330);
+        food.setPosition(330, 250);
+
+        direction = null;
+        paused = false;
+        score = 0;
+
+        menuPanel.updateScore(score);
+        menuPanel.updateTextPauseButton(false);
+
+        repaint();
+        mainGameLoop();
+    }
     private void mainGameLoop() {
 
         Thread gameThread = new Thread(() -> {
