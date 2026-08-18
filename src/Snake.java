@@ -6,6 +6,8 @@ import java.util.ArrayList;
 public class Snake {
 
     public static final int TILE_SIZE = 80;
+    private static final int BODY_SIZE = 40;
+    private static final int BODY_OFFSET = (TILE_SIZE - BODY_SIZE) / 2;
     private int x;
     private int y;
 
@@ -105,15 +107,36 @@ public class Snake {
         desiredBodyLength = 0;
     }
     public void draw(Graphics graphics, Integer direction) {
-        graphics.setColor(Color.DARK_GRAY);
+
+        Graphics2D bodyGraphics = (Graphics2D) graphics.create();
+
+        bodyGraphics.setColor(Color.DARK_GRAY);
+        bodyGraphics.setStroke(new BasicStroke(
+                BODY_SIZE,
+                BasicStroke.CAP_ROUND,
+                BasicStroke.JOIN_ROUND
+        ));
+
+        int previousX = x + TILE_SIZE / 2;
+        int previousY = y + TILE_SIZE / 2;
+
         for (Point bodyPart : bodyParts) {
-            graphics.fillRect(
-                    bodyPart.x,
-                    bodyPart.y,
-                    TILE_SIZE,
-                    TILE_SIZE
+
+            int currentX = bodyPart.x + TILE_SIZE / 2;
+            int currentY = bodyPart.y + TILE_SIZE / 2;
+
+            bodyGraphics.drawLine(
+                    previousX,
+                    previousY,
+                    currentX,
+                    currentY
             );
+
+            previousX = currentX;
+            previousY = currentY;
         }
+
+        bodyGraphics.dispose();
 
         Graphics2D graphics2D = (Graphics2D) graphics.create();
 
