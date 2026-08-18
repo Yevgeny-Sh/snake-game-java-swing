@@ -7,7 +7,6 @@ public class Snake {
 
     public static final int TILE_SIZE = 80;
     private static final int BODY_SIZE = 40;
-    private static final int BODY_OFFSET = (TILE_SIZE - BODY_SIZE) / 2;
     private int x;
     private int y;
 

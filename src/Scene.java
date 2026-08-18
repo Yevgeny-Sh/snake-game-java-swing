@@ -8,7 +8,7 @@ public class Scene extends JPanel {
     private final Random random = new Random();
 
     private Integer direction = null;
-    private Food food;
+    private final Food food;
     private static final int BORDER_SIZE = 10;
     private int score = 0;
     private final MenuPanel menuPanel;
@@ -114,7 +114,8 @@ public class Scene extends JPanel {
         food.setPosition(x, y);
     }
 
-    public void togglePause() {
+    public synchronized void togglePause() {
+        // Prevents multiple threads from toggling pause at the same time
         paused = !paused;
         menuPanel.updateTextPauseButton(paused);
         requestFocusInWindow();
