@@ -21,17 +21,29 @@ public class MovementListener implements KeyListener {
             return;
         }
 
-        if (e.getKeyCode() == KeyEvent.VK_D) {
-            this.scene.setDirection(0);
+        // ימינה - D או חץ ימינה
+        if (e.getKeyCode() == KeyEvent.VK_D ||
+            e.getKeyCode() == KeyEvent.VK_RIGHT) {
 
-        } else if (e.getKeyCode() == KeyEvent.VK_A) {
-            this.scene.setDirection(1);
+            scene.setDirection(0);
 
-        } else if (e.getKeyCode() == KeyEvent.VK_S) {
-            this.scene.setDirection(2);
+        // שמאלה - A או חץ שמאלה
+        } else if (e.getKeyCode() == KeyEvent.VK_A ||
+                   e.getKeyCode() == KeyEvent.VK_LEFT) {
 
-        } else if (e.getKeyCode() == KeyEvent.VK_W) {
-            this.scene.setDirection(3);
+            scene.setDirection(1);
+
+        // למטה - S או חץ למטה
+        } else if (e.getKeyCode() == KeyEvent.VK_S ||
+                   e.getKeyCode() == KeyEvent.VK_DOWN) {
+
+            scene.setDirection(2);
+
+        // למעלה - W או חץ למעלה
+        } else if (e.getKeyCode() == KeyEvent.VK_W ||
+                   e.getKeyCode() == KeyEvent.VK_UP) {
+
+            scene.setDirection(3);
         }
     }
 

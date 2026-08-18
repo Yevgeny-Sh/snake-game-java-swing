@@ -126,20 +126,24 @@ public class Scene extends JPanel {
         );
     }
 
-    public void startNewGame() {
+   public void startNewGame() {
 
-        snake.reset(330, 330);
-        food.setPosition(330, 250);
+    snake.reset(330, 330);
+    food.setPosition(330, 250);
 
-        direction = null;
-        paused = false;
-        score = 0;
+    direction = null;
+    paused = false;
+    score = 0;
 
-        menuPanel.updateScore(score);
-        menuPanel.updateTextPauseButton(false);
+    menuPanel.updateScore(score);
+    menuPanel.updateTextPauseButton(false);
 
-        repaint();
-        mainGameLoop();
+    repaint();
+
+    requestFocusInWindow();
+
+    mainGameLoop();
+}
     }
     private void mainGameLoop() {
 
